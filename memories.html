@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <nav class="sidebar">
+        <div class="nav-logo">
+            <div class="heart-icon">💕</div>
+            <span>Sanctuary</span>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link" data-page="home"><span class="icon">🏠</span><span class="label">Home</span></a></li>
+            <li><a href="music.html" class="nav-link" data-page="music"><span class="icon">🎵</span><span class="label">Music</span></a></li>
+            <li><a href="games.html" class="nav-link" data-page="games"><span class="icon">🎮</span><span class="label">Games</span></a></li>
+            <li><a href="chatbot.html" class="nav-link" data-page="chatbot"><span class="icon">💬</span><span class="label">Chat</span></a></li>
+            <li><a href="wellness.html" class="nav-link" data-page="wellness"><span class="icon">🌸</span><span class="label">Wellness</span></a></li>
+            <li><a href="memories.html" class="nav-link active" data-page="memories"><span class="icon">📸</span><span class="label">Memories</span></a></li>
+            <li><a href="settings.html" class="nav-link" data-page="settings"><span class="icon">⚙️</span><span class="label">Settings</span></a></li>
+        </ul>
+    </nav>
+
+    <div class="particle-background" id="particleBackground"></div>
+
+    <main class="main-content">
+        <section class="memories-page">
+            <h1>📸 Memories & Moments</h1>
+
+            <!-- Memory Gallery -->
+            <div class="gallery-section">
+                <div class="section-header">
+                    <h2>Photo Gallery</h2>
+                    <button class="btn-add-photo" onclick="app.toggleAddPhoto()" title="Add photo">➕</button>
+                </div>
+
+                <!-- Add Photo Form -->
+                <div class="add-photo-form" id="addPhotoForm" style="display: none;">
+                    <input type="text" id="photoUrlInput" placeholder="Photo URL or upload" class="input-field">
+                    <input type="file" id="photoFileInput" accept="image/*" class="input-field" onchange="app.handlePhotoUpload(event)">
+                    <input type="text" id="photoCaptionInput" placeholder="Caption for this photo" class="input-field">
+                    <div class="button-group">
+                        <button class="btn-save" onclick="app.addPhoto()">Add Photo</button>
+                        <button class="btn-cancel" onclick="app.toggleAddPhoto()">Cancel</button>
+                    </div>
+                </div>
+
+                <!-- Photos Grid -->
+                <div class="polaroid-grid" id="polaroidGrid"></div>
+            </div>
+
+            <!-- Our Moments -->
+            <div class="moments-section glass-card">
+                <div class="section-header">
+                    <h2>💕 Our Moments</h2>
+                    <button class="btn-add-moment" onclick="app.toggleAddMoment()" title="Add moment">➕</button>
+                </div>
+
+                <!-- Add Moment Form -->
+                <div class="add-moment-form" id="addMomentForm" style="display: none;">
+                    <input type="date" id="momentDateInput" class="input-field">
+                    <input type="text" id="momentTitleInput" placeholder="Title of the moment" class="input-field">
+                    <textarea id="momentNoteInput" placeholder="Write about this special moment..." class="input-field" rows="4"></textarea>
+                    <div class="button-group">
+                        <button class="btn-save" onclick="app.addMoment()">Save</button>
+                        <button class="btn-cancel" onclick="app.toggleAddMoment()">Cancel</button>
+                    </div>
+                </div>
+
+                <!-- Moments List -->
+                <div class="moments-list" id="momentsList"></div>
+            </div>
+
+            <!-- Private Journal -->
+            <div class="journal-section glass-card">
+                <div class="section-header">
+                    <h2>📔 Private Journal</h2>
+                    <button class="journal-lock-btn" id="journalLockBtn" onclick="app.toggleJournalLock()" title="Lock/Unlock">🔓</button>
+                </div>
+
+                <!-- Journal Lock Setup -->
+                <div class="journal-lock-setup" id="journalLockSetup" style="display: none;">
+                    <h3>Set Journal Password</h3>
+                    <input type="password" id="journalPasswordInput" placeholder="Create a password" class="input-field">
+                    <button class="btn-save" onclick="app.setJournalPassword()">Set Password</button>
+                </div>
+
+                <!-- Journal Unlock -->
+                <div class="journal-unlock" id="journalUnlock" style="display: none;">
+                    <h3>Unlock Journal</h3>
+                    <input type="password" id="journalPasswordCheck" placeholder="Enter password" class="input-field">
+                    <button class="btn-save" onclick="app.checkJournalPassword()">Unlock</button>
+                </div>
+
+                <!-- Journal Content -->
+                <div class="journal-content" id="journalContent" style="display: none;">
+                    <textarea id="journalText" placeholder="Write your thoughts here..." class="journal-textarea"></textarea>
+                    <button class="btn-save" onclick="app.saveJournal()">Save Entry</button>
+                </div>
+
+                <div class="journal-locked-message" id="journalLockedMessage">
+                    🔒 Journal is locked. Click the lock button to unlock.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            app.initMemories();
+            app.createParticles();
+        });
+    </script>
+</body>
+</html>
